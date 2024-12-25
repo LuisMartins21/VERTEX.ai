@@ -2,8 +2,6 @@ import "./signinform.css";
 import {useState} from 'react'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
-
 //Back-End
 /*const form = document.getElementById("Signin-Form");
 form.addEventListener("submit", registerUser);
@@ -16,15 +14,13 @@ function registerUser(event) {
         }*/
 
 //Front-End
-export default function SigninForm() {
+export default function SignUpForm() {
         const [formData, setFormData] = useState({
-                username: "",
                 email: "",
                 password: ""
         });
         const [message, setMessage] = useState("");
         const navigate = useNavigate();
-
         const handleChange = (e) => {
                 const { name, value } = e.target;
                 setFormData({ ...formData, [name]: value });
@@ -33,7 +29,7 @@ export default function SigninForm() {
         const handleSubmit = async (e) => {
                 e.preventDefault();
                 try {
-                    const response = await axios.post("/signin", formData); 
+                    const response = await axios.post("/signup", formData); 
                     navigate("/home");
                 } catch (error) {
                     if (error.response) {
@@ -49,15 +45,6 @@ export default function SigninForm() {
                         <form onSubmit={handleSubmit}>
                                 <p>Welcome to Vertex.AI</p>
                                 <div className="Input-Area">
-                                        <label for="username">Your Name:</label>
-                                        <input
-                                                placeholder="Name"
-                                                type="text"
-                                                id="username"
-                                                name="username"
-                                                value={formData.username}
-                                                onChange={handleChange}
-                                        />
                                         <label for="email">Your Email:</label>
                                         <input
                                                 placeholder="Email"
@@ -68,7 +55,7 @@ export default function SigninForm() {
                                                 onChange={handleChange}
                                         />
                                         <label for="password">
-                                                Choose Your Password:
+                                                Enter Your Password:
                                         </label>
                                         <input
                                                 placeholder="Password"
@@ -81,7 +68,7 @@ export default function SigninForm() {
                                 </div>
 
                                 <button class="Submit-Button">
-                                        Create Account
+                                        Log In
                                 </button>
                         </form>
                         {message && <p>{message}</p>}

@@ -1,8 +1,21 @@
 import "./nav.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Nav() {
+        const [username, setUsername] = useState(null);
+
+        useEffect(() => {
+            axios.get("/auth/check", { withCredentials: true })
+                .then((response) => {
+                    setUsername(response.data.username);
+                })
+                .catch(() => {
+                    setUsername(null);
+                });
+        }, []);
         return (
                 <nav className="App-nav">
                         <ul>
@@ -36,6 +49,9 @@ export default function Nav() {
                                                 className="Signin-button"
                                                 href="/signorlog"
                                         >
+                                                {username ? (
+                                                        <li className="App-item3">Welcome, {username}!</li>
+                                                ) : (
                                                 <FontAwesomeIcon
                                                         icon={faUser}
                                                         bounce
@@ -45,6 +61,7 @@ export default function Nav() {
                                                                 color: "#ffffff",
                                                         }}
                                                 />
+                                        )}
                                         </a>
                                 </li>
                         </ul>

@@ -4,6 +4,7 @@ import Chat from "./pages/chat";
 import Signin from "./pages/signin";
 import Error404 from "./pages/error404";
 import Signorlog from "./pages/signorlog";
+import SignUp from "./pages/signup";
 
 export default function App() {
         return (
@@ -34,6 +35,11 @@ export default function App() {
                                         <Route
                                                 path="/signorlog"
                                                 element={<Signorlog />}
+                                        />
+
+                                        <Route
+                                                path="/signup"
+                                                element={<SignUp />}
                                         />
                                 </Routes>
                         </BrowserRouter>
